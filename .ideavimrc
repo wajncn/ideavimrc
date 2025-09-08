@@ -1,0 +1,69 @@
+" =================== 基础设置 ===================
+set number              " 显示行号
+set relativenumber      " 相对行号
+set showmode            " 显示模式
+set showmatch           " 匹配括号高亮
+set incsearch           " 增量搜索
+set tabstop=4           " Tab 显示为 4 个空格
+set shiftwidth=4        " 自动缩进宽度为 4
+set autoindent          " 自动缩进
+
+let mapleader = " "     " 设置 leader 键为空格
+
+" =================== 插件支持（IdeaVim 内置） ===================
+set easymotion
+set sneak
+
+" =================== 常用快捷键 ===================
+" 插入模式光标移动
+inoremap <C-k> <Up>
+inoremap <C-j> <Down>
+inoremap <C-h> <Left>
+inoremap <C-l> <Right>
+inoremap jj <Esc>
+
+" 普通模式增强
+nmap U <C-R>
+map ) $
+map L $
+map H 0
+
+" =================== IdeaVim 特定配置 ===================
+" 根据 IDE 不同执行不同快捷键
+if &ide =~? 'DataGrip'
+  map <leader>d <Action>(Console.Jdbc.Execute)
+  map <leader>p <Action>(Console.Jdbc.ExplainPlan)
+else
+  map <leader>d <Action>(DebugClass)
+endif
+
+" ========== 常用 IDE 动作 ==========
+map <BS> <Action>(Back)
+map gi <Action>(GotoImplementation)
+map <leader>f <Action>(ReformatCode) | <Action>(OptimizeImports)
+map <leader>r <Action>(RenameElement)
+map <leader>i <Action>(OptimizeImports)
+map <leader>c <Action>(Stop)
+map <leader>t <Action>(Terminal.OpenInTerminal)
+map <leader>cf <Action>(CompileFile)
+map <leader>m <Action>(ExtractMethod)
+map <leader>a <Action>(Annotate)
+map <leader>b <Action>(ToggleLineBreakpoint)
+map <leader>h <Action>(Vcs.ShowTabbedFileHistory)
+map <S-Space> <Action>(GotoNextError)
+map <leader>e <Action>(GotoNextError)
+map <leader>s <Action>(SelectInProjectView)
+map <leader>z <Action>(ToggleZenMode)
+map <leader>v <Action>(IntroduceVariable)
+map <leader>o <Action>(FileStructurePopup)
+
+" ========== Maven/编译快捷键 ==========
+map <leader>mp :action Maven.Recompile<CR>
+map <leader>mc :action Maven.Clean<CR>
+map <leader>jc :action Compile<CR>
+
+" =================== 提示 ===================
+" .ideavimrc 使用和 vimrc 类似的语法，但只支持 IdeaVim 提供的命令。
+" 更多参考：
+"   https://jb.gg/h38q75
+"   https://github.com/JetBrains/ideavim/wiki/IdeaVim-Plugins
